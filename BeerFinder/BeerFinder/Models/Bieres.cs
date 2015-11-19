@@ -7,6 +7,7 @@ namespace BeerFinder.Models
 {
     public class BieresRecord
     {
+        public long Id { get; set; }
     }
 
     public class BieresTable
