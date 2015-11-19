@@ -20,7 +20,8 @@ namespace BeerFinder
 
         protected void Session_Start()
         {
-
+            String DatabasePath = Server.MapPath(@"~\App_Data\BeerDatabase.mdf");
+            Session["Database"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DatabasePath + "'; Integrated Security=true; Max Pool Size=1024; Pooling=true;";
         }
     }
 }
