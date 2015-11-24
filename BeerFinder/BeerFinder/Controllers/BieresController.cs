@@ -28,13 +28,13 @@ namespace BeerFinder.Controllers
         }
 
         [HttpGet]
-        public ActionResult AjouterType()
+        public ActionResult AjouterTypes()
         {
             return View(new TypesRecord());
         }
 
         [HttpPost]
-        public ActionResult AjouterType(TypesRecord type)
+        public ActionResult AjouterTypes(TypesRecord type)
         {
             if (ModelState.IsValid)
             {
@@ -46,13 +46,36 @@ namespace BeerFinder.Controllers
             return View(type);
         }
 
-        public ActionResult EditerType(String Id)
+        public ActionResult EditerTypes(String Id)
         {
             TypesTable types = new TypesTable(Session["Database"]);
             if (types.SelectByID(Id))
                 return View(types.type);
             else
                 return RedirectToAction("ListerTypes", "Bieres");
+        }
+
+        [HttpPost]
+        public ActionResult EditerTypes(TypesRecord record)
+        {
+            TypesTable table = new TypesTable(Session["Database"]);
+            if (ModelState.IsValid)
+            {
+                if (table.SelectByID(record.Id))
+                {
+                    table.type = record;
+                    table.Update();
+                    return RedirectToAction("ListerTypes", "Bieres");
+                }
+            }
+            return View(record);
+        }
+
+        public ActionResult SupprimerTypes(String Id)
+        {
+            TypesTable table = new TypesTable(Session["Database"]);
+            table.DeleteRecordByID(Id);
+            return RedirectToAction("ListerTypes", "Bieres");
         }
 
         ////////////////////////////////////////////////////////////

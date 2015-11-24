@@ -29,9 +29,8 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Éditer", "EditerType", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerTypes", "Bieres", new { id = item.Id })'"></span> |
+            <span class="glyphicon glyphicon-trash" onclick="BBConfirm('Êtes-vous sûr de vouloir supprimer @item.NomType ?', '@Url.Action("SupprimerTypes", "Bieres", new { id=item.Id })')"></span>
         </td>
     </tr>
 }

@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mon application ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        span.glyphicon:hover {
+            cursor:pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,3 +45,27 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<script type="text/javascript">
+    function BBConfirm(message, href) {
+        bootbox.confirm({
+            title: '<b>Attention!<b/>',
+            message: message,
+            buttons: {
+                'cancel': {
+                    label: 'Annuler',
+                    className: 'btn-default pull-left'
+                },
+                'confirm': {
+                    label: 'Procéder',
+                    className: 'btn-primary pull-right'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    window.location = href;
+                }
+            }
+        });
+    }
+</script>
