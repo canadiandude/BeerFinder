@@ -120,6 +120,7 @@
     <Compile Include="Models\Bars.cs" />
     <Compile Include="Models\Bieres.cs" />
     <Compile Include="Models\ImageGUIDReference.cs" />
+    <Compile Include="Models\Selections.cs" />
     <Compile Include="Models\SqlExpressUtilities.cs" />
     <Compile Include="Models\Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
