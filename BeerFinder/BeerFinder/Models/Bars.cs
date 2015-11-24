@@ -11,7 +11,7 @@ namespace BeerFinder.Models
         public long Id { get; set; }
         [Display(Name = "Nom du Bar")]
         [StringLength(50), Required]
-        public String Nom { get; set; }
+        public String NomBar { get; set; }
         [Display(Name = "Logo")]
         [StringLength(50), Required]
         public String Logo { get; set; }
@@ -36,6 +36,17 @@ namespace BeerFinder.Models
             SetTableName("Bars");
         }
 
+       public List<BarsRecord> ToList()
+        {
+            List<object> list = this.RecordsList();
 
+            List<BarsRecord> bars_list = new List<BarsRecord>();
+            foreach (BarsRecord bar in list)
+            {
+                bars_list.Add(bar);
+            }
+            return bars_list;
+
+        }
     }
 }

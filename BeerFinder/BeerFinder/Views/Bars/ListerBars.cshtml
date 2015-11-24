@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BeerFinder.Models.BarsRecord>
+
+@{
+    ViewBag.Title = "ListerBars";
+}
+
+<h2>ListerBars</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AjouterBars")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomBar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomBar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adresse)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditerBar", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "SupprimerBar", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>
