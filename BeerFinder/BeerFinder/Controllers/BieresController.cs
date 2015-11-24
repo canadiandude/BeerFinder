@@ -46,12 +46,21 @@ namespace BeerFinder.Controllers
             return View(type);
         }
 
+        public ActionResult EditerType(String Id)
+        {
+            TypesTable types = new TypesTable(Session["Database"]);
+            if (types.SelectByID(Id))
+                return View(types.type);
+            else
+                return RedirectToAction("ListerTypes", "Bieres");
+        }
+
         ////////////////////////////////////////////////////////////
         // BIÈRES
         ////////////////////////////////////////////////////////////
         public ActionResult ListerBieres()
         {
-            BieresTable table = new BieresTable();
+            BieresTable table = new BieresTable(Session["Database"]);
             table.SelectAll();
 
             return View(table.ToList());

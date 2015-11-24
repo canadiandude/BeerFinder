@@ -163,6 +163,7 @@
     <Content Include="Views\Bieres\Index.cshtml" />
     <Content Include="Views\Bieres\ListerTypes.cshtml" />
     <Content Include="Views\Bieres\ListerBieres.cshtml" />
+    <Content Include="Views\Bieres\EditerType.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

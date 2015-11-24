@@ -70,6 +70,7 @@ namespace BeerFinder.Models
         public override void SelectAll(string orderBy = "")
         {
             String sql = "SELECT " +
+                            "Bieres.Id, " +
                             "Bieres.NomBiere, " +
                             "Bieres.IdType, " +
                             "Types.NomType, " +
