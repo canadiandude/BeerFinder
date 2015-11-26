@@ -7,7 +7,11 @@
 <h2>AjouterBars</h2>
 
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm("AjouterBars",
+                        "Bars",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -27,11 +31,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Logo)
-                @Html.ValidationMessageFor(model => model.Logo)
+                <img id="new_image" src="@Url.Content("~" + Model.GetLogoURL())" class="poster" />
+                <input type="file" name="FU_Image" id="FU_Image" style="display:none;" onchange="PreLoadImage();" />
+                <br />
+                <input type="button" class="AvatarBrowseButton" id="uploadTrigger" onclick="document.getElementById('FU_Image').click();" value="Choisir le logo..." />
             </div>
         </div>
 
+       
         <div class="form-group">
             @Html.LabelFor(model => model.Adresse, new { @class = "control-label col-md-2" })
             <div class="col-md-10">

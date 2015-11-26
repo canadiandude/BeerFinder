@@ -13,12 +13,31 @@ namespace BeerFinder.Models
         [StringLength(50), Required]
         public String NomBar { get; set; }
         [Display(Name = "Logo")]
-        [StringLength(50), Required]
         public String Logo { get; set; }
         [Display(Name = "Adresse")]
         [StringLength(100), Required]
         public String Adresse { get; set; }
+        ImageGUIDReference ImgRef;
 
+        public BarsRecord()
+        {
+            ImgRef = new ImageGUIDReference(@"/Images/", @"Anonymous.png");
+            Logo = "";
+        
+        }
+        public String GetLogoURL()
+        {
+            return ImgRef.GetImageURL(Logo);      
+        }
+
+        public void UploadLogo(HttpRequestBase Request)
+        {
+           Logo = ImgRef.UpLoadImage(Request, Logo);
+        }
+        public void RemoveLogo()
+        {
+            ImgRef.Remove(Logo);
+        }
     }
     public class BarsTable:SqlExpressUtilities.SqlExpressWrapper
     {
