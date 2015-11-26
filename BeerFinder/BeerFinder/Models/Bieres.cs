@@ -21,11 +21,16 @@ namespace BeerFinder.Models
         [StringLength(50), Required]
         public String Brasserie { get; set; }
 
+        [Display(Name="Volume d'alcool")]
+        [Range(0,100), Required]
         public int VolumeAlcool { get; set; }
 
+        [Required]
         public String Etiquette { get; set; }
 
         private ImageGUIDReference ImageReference;
+
+        public List<TypesRecord> ListeTypes { get; set; }
 
         public BieresRecord()
         {
@@ -33,6 +38,7 @@ namespace BeerFinder.Models
             Brasserie = "";
             Etiquette = "";
             ImageReference = new ImageGUIDReference(@"/Images/", "defaultbottle.jpg");
+            ListeTypes = new List<TypesRecord>();
         }
 
         public String GetEtiquetteURL()
@@ -53,17 +59,17 @@ namespace BeerFinder.Models
 
     public class BieresTable : SqlExpressUtilities.SqlExpressWrapper
     {
-        public BieresRecord bieres { get; set; }
+        public BieresRecord biere { get; set; }
 
         public BieresTable(object cs) : base(cs)
         {
-            bieres = new BieresRecord();
+            biere = new BieresRecord();
             SetTableName("Bieres");
         }
 
         public BieresTable()
         {
-            bieres = new BieresRecord();
+            biere = new BieresRecord();
             SetTableName("Bieres");
         }
 
@@ -86,6 +92,12 @@ namespace BeerFinder.Models
             }
 
             QuerySQL(sql);
+        }
+
+        public override void Insert()
+        {
+            String sql = "INSERT INTO " + SQLTableName + "(NomBiere, IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(";
+                            
         }
 
         public List<BieresRecord> ToList()

@@ -1,0 +1,81 @@
+﻿@model BeerFinder.Models.BieresRecord
+
+@{
+    ViewBag.Title = "AjouterBiere";
+}
+
+<h2>AjouterBiere</h2>
+<script type="text/javascript">
+    function SetTypeId() {
+        document.getElementById("IdType").selectedIndex = document.getElementById("NomType").selectedIndex;
+    }
+</script>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>BieresRecord</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomBiere, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NomBiere)
+                @Html.ValidationMessageFor(model => model.NomBiere)
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.IdType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdType, new SelectList(Model.ListeTypes, "Id", "Id"))
+                @Html.ValidationMessageFor(model => model.IdType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NomType, new SelectList(Model.ListeTypes, "NomType", "NomType"), new { @onchange = "SetTypeId();"})
+                @Html.ValidationMessageFor(model => model.NomType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Brasserie, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Brasserie)
+                @Html.ValidationMessageFor(model => model.Brasserie)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VolumeAlcool, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VolumeAlcool)
+                @Html.ValidationMessageFor(model => model.VolumeAlcool)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Etiquette, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Etiquette)
+                @Html.ValidationMessageFor(model => model.Etiquette)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

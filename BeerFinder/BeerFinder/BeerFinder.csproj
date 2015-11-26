@@ -112,6 +112,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BarsController.cs" />
     <Compile Include="Controllers\BieresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,6 +168,10 @@
     <Content Include="Views\Bieres\ListerTypes.cshtml" />
     <Content Include="Views\Bieres\ListerBieres.cshtml" />
     <Content Include="Views\Bieres\EditerTypes.cshtml" />
+    <Content Include="Views\Bars\AjouterBars.cshtml" />
+    <Content Include="Views\Bars\EditerBar.cshtml" />
+    <Content Include="Views\Bars\ListerBars.cshtml" />
+    <Content Include="Views\Bieres\AjouterBieres.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

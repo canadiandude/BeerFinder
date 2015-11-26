@@ -88,5 +88,28 @@ namespace BeerFinder.Controllers
 
             return View(table.ToList());
         }
+
+        [HttpGet]
+        public ActionResult AjouterBieres()
+        {
+            BieresRecord biere = new BieresRecord();
+            TypesTable types = new TypesTable(Session["Database"]);
+            types.SelectAll();
+            biere.ListeTypes = types.ToList();
+            return View(biere);
+        }
+
+        [HttpPost]
+        public ActionResult AjouterBieres(BieresRecord biere)
+        {
+            if (ModelState.IsValid)
+            {
+                BieresTable table = new BieresTable(Session["Database"]);
+                table.biere = biere;
+                table.Insert();
+                return RedirectToAction("Index", "Bieres");
+            }
+            return View(biere);
+        }
 	}
 }
