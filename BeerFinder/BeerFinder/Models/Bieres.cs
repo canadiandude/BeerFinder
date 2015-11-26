@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlExpressUtilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -96,8 +97,14 @@ namespace BeerFinder.Models
 
         public override void Insert()
         {
-            String sql = "INSERT INTO " + SQLTableName + "(NomBiere, IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(";
-                            
+            String sql = "INSERT INTO " + SQLTableName + "(NomBiere, IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(" +
+                            "'" + SQLHelper.PrepareForSql(biere.NomBiere) + "', " +
+                            biere.IdType + ", " +
+                            "'" + SQLHelper.PrepareForSql(biere.Brasserie) + "', " +
+                            biere.VolumeAlcool + ", " +
+                            "'" + SQLHelper.PrepareForSql(biere.Etiquette) + "')";
+
+            NonQuerySQL(sql);                
         }
 
         public List<BieresRecord> ToList()
