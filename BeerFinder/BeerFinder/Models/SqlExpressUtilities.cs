@@ -307,7 +307,7 @@ namespace SqlExpressUtilities
             return SelectByID(ID.ToString());
         }
         // Extraire l'enregistrement d'id ID
-        public bool SelectByID(String ID)
+        public virtual bool SelectByID(String ID)
         {
             string sql = "SELECT * FROM " + SQLTableName + " WHERE ID = " + ID;
             QuerySQL(sql);

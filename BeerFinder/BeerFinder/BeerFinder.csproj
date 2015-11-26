@@ -172,6 +172,7 @@
     <Content Include="Views\Bars\EditerBar.cshtml" />
     <Content Include="Views\Bars\ListerBars.cshtml" />
     <Content Include="Views\Bieres\AjouterBieres.cshtml" />
+    <Content Include="Views\Bieres\EditerBieres.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

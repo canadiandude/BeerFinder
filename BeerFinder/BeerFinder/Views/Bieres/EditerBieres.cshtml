@@ -1,7 +1,7 @@
 ﻿@model BeerFinder.Models.BieresRecord
 
 @{
-    ViewBag.Title = "AjouterBiere";
+    ViewBag.Title = "EditerBieres";
 }
 
 <script type="text/javascript">
@@ -10,9 +10,9 @@
     }
 </script>
 
-<h2>AjouterBiere</h2>
+<h2>EditerBieres</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -20,6 +20,7 @@
         <h4>BieresRecord</h4>
         <hr />
         @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.NomBiere, new { @class = "control-label col-md-2" })
@@ -29,10 +30,10 @@
             </div>
         </div>
 
-        <div class="form-group" style="display:none">
+        <!--<div class="form-group">
             @Html.LabelFor(model => model.IdType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.IdType, new SelectList(Model.ListeTypes, "Id", "Id"))
+                @Html.EditorFor(model => model.IdType)
                 @Html.ValidationMessageFor(model => model.IdType)
             </div>
         </div>
@@ -40,7 +41,24 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NomType, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.NomType, new SelectList(Model.ListeTypes, "NomType", "NomType"), new { @onchange = "SetTypeId();"})
+                @Html.EditorFor(model => model.NomType)
+                @Html.ValidationMessageFor(model => model.NomType)
+            </div>
+        </div>
+        -->
+
+        <div class="form-group" style="display:none">
+            @Html.LabelFor(model => model.IdType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdType, new SelectList(Model.ListeTypes, "Id", "Id", Model.IdType))
+                @Html.ValidationMessageFor(model => model.IdType)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NomType, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NomType, new SelectList(Model.ListeTypes, "NomType", "NomType", Model.NomType), new { @onchange = "SetTypeId();" })
                 @Html.ValidationMessageFor(model => model.NomType)
             </div>
         </div>
@@ -71,7 +89,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

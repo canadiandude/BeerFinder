@@ -95,9 +95,32 @@ namespace BeerFinder.Models
             QuerySQL(sql);
         }
 
+        public override bool SelectByID(string ID)
+        {
+            String sql = "SELECT " +
+                "Bieres.Id, " +
+                "Bieres.NomBiere, " +
+                "Bieres.IdType, " +
+                "Types.NomType, " +
+                "Bieres.Brasserie, " +
+                "Bieres.VolumeAlcool, " +
+                "Bieres.Etiquette " +
+                "FROM Bieres " +
+                "INNER JOIN Types ON Bieres.IdType=Types.Id " +
+                "WHERE Bieres.Id=" + ID;
+            QuerySQL(sql);
+
+            if (reader != null)
+            {
+                Next();
+                return true;
+            }
+            return false;
+        }
+
         public override void Insert()
         {
-            String sql = "INSERT INTO " + SQLTableName + "(NomBiere, IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(" +
+            String sql = "INSERT INTO " + SQLTableName + "(NomBiere,IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(" +
                             "'" + SQLHelper.PrepareForSql(biere.NomBiere) + "', " +
                             biere.IdType + ", " +
                             "'" + SQLHelper.PrepareForSql(biere.Brasserie) + "', " +
@@ -105,6 +128,18 @@ namespace BeerFinder.Models
                             "'" + SQLHelper.PrepareForSql(biere.Etiquette) + "')";
 
             NonQuerySQL(sql);                
+        }
+
+        public override void Update()
+        {
+            String sql = "UPDATE " + SQLTableName + " SET " +
+                            "NomBiere='" + SQLHelper.PrepareForSql(biere.NomBiere) + "', " +
+                            "IdType=" + biere.IdType + ", " +
+                            "Brasserie='" + SQLHelper.PrepareForSql(biere.Brasserie) + "', " +
+                            "VolumeAlcool=" + biere.VolumeAlcool + ", " +
+                            "Etiquette='" + biere.Etiquette + "' " +
+                            "WHERE Id=" + biere.Id;
+            NonQuerySQL(sql);
         }
 
         public List<BieresRecord> ToList()

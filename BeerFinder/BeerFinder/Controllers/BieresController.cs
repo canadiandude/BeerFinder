@@ -111,5 +111,41 @@ namespace BeerFinder.Controllers
             }
             return View(biere);
         }
-	}
+
+        [HttpGet]
+        public ActionResult EditerBieres(String Id)
+        {
+            BieresTable bieres = new BieresTable(Session["Database"]);
+            TypesTable types = new TypesTable(Session["Database"]);
+            types.SelectAll();
+            bieres.biere.ListeTypes = types.ToList();
+            if (bieres.SelectByID(Id))
+                return View(bieres.biere);
+            else
+                return RedirectToAction("ListerBieres", "Bieres");
+        }
+
+        [HttpPost]
+        public ActionResult EditerBieres(BieresRecord record)
+        {
+            BieresTable table = new BieresTable(Session["Database"]);
+            if (ModelState.IsValid)
+            {
+                if (table.SelectByID(record.Id.ToString()))
+                {
+                    table.biere = record;
+                    table.Update();
+                    return RedirectToAction("ListerBieres", "Bieres");
+                }
+            }
+            return View(record);
+        }
+
+        public ActionResult SupprimerBieres(String Id)
+        {
+            BieresTable table = new BieresTable(Session["Database"]);
+            table.DeleteRecordByID(Id);
+            return RedirectToAction("ListerBieres", "Bieres");
+        }
+    }
 }
