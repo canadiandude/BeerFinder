@@ -106,6 +106,7 @@ namespace BeerFinder.Controllers
             {
                 BieresTable table = new BieresTable(Session["Database"]);
                 table.biere = biere;
+                table.biere.UploadEtiquette(Request);
                 table.Insert();
                 return RedirectToAction("Index", "Bieres");
             }

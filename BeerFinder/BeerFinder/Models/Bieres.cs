@@ -26,7 +26,6 @@ namespace BeerFinder.Models
         [Range(0,100), Required]
         public int VolumeAlcool { get; set; }
 
-        [Required]
         public String Etiquette { get; set; }
 
         private ImageGUIDReference ImageReference;
