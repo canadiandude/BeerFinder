@@ -68,6 +68,7 @@ namespace BeerFinder.Controllers
                {
                    BarsTable table = new BarsTable(Session["Database"]);
                    table.bar = bar;
+                   table.bar.UploadLogo(Request);
                    table.Update();
                    return RedirectToAction("ListerBars", "Bars");
                }

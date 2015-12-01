@@ -67,5 +67,13 @@ namespace BeerFinder.Models
             return bars_list;
 
         }
+       public override void DeleteRecordByID(String ID)
+       {
+           if (this.SelectByID(ID))
+           {
+               this.bar.RemoveLogo();
+               base.DeleteRecordByID(ID);
+           }
+       }
     }
 }
