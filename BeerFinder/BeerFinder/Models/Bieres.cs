@@ -11,7 +11,7 @@ namespace BeerFinder.Models
     {
         public long Id { get; set; }
 
-        [Display(Name="Nom")]
+        [Display(Name = "Nom")]
         [StringLength(50), Required]
         public String NomBiere { get; set; }
 
@@ -22,8 +22,8 @@ namespace BeerFinder.Models
         [StringLength(50), Required]
         public String Brasserie { get; set; }
 
-        [Display(Name="Volume d'alcool")]
-        [Range(0,100), Required]
+        [Display(Name = "Volume d'alcool")]
+        [Range(0, 100), Required]
         public int VolumeAlcool { get; set; }
 
         public String Etiquette { get; set; }
@@ -61,7 +61,8 @@ namespace BeerFinder.Models
     {
         public BieresRecord biere { get; set; }
 
-        public BieresTable(object cs) : base(cs)
+        public BieresTable(object cs)
+            : base(cs)
         {
             biere = new BieresRecord();
             SetTableName("Bieres");
@@ -117,6 +118,23 @@ namespace BeerFinder.Models
             return false;
         }
 
+        public void SelectFromSelection(String BarId)
+        {
+            String sql = "SELECT " +
+                            "Bieres.Id, " +
+                            "Bieres.NomBiere, " +
+                            "Bieres.IdType, " +
+                            "Types.NomType, " +
+                            "Bieres.Brasserie, " +
+                            "Bieres.VolumeAlcool, " +
+                            "Bieres.Etiquette " +
+                            "FROM Bieres " +
+                            "INNER JOIN Types ON Bieres.IdType=Types.Id " +
+                            "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar="+BarId+")";
+
+            QuerySQL(sql);
+        }
+
         public override void Insert()
         {
             String sql = "INSERT INTO " + SQLTableName + "(NomBiere,IdType,Brasserie,VolumeAlcool,Etiquette) VALUES(" +
@@ -126,7 +144,7 @@ namespace BeerFinder.Models
                             biere.VolumeAlcool + ", " +
                             "'" + SQLHelper.PrepareForSql(biere.Etiquette) + "')";
 
-            NonQuerySQL(sql);                
+            NonQuerySQL(sql);
         }
 
         public override void Update()

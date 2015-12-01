@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BeerFinder.Models.BieresRecord>
+
+@{
+    ViewBag.Title = "AfficherSelections";
+}
+
+<h2>AfficherSelections</h2>
+
+<p>
+    @Html.ActionLink("Ajouter une bière à la sélection", "AjouterSelection")
+</p>
+
+<h1>Sélection du @(((BeerFinder.Models.BarsTable)Session["Bar"]).bar.NomBar)</h1>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomBiere)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brasserie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VolumeAlcool)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Etiquette)
+        </th>
+        <th>
+            Prix
+        </th>
+        <th></th>
+    </tr>
+
+@{int index = 0;
+foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomBiere)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brasserie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VolumeAlcool)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etiquette)
+        </td>
+        <td>
+            @(((List<String>)Session["ListePrix"])[index++])
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+}
+
+</table>
