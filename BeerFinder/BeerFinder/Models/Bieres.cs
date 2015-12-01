@@ -141,6 +141,15 @@ namespace BeerFinder.Models
             NonQuerySQL(sql);
         }
 
+        public override void DeleteRecordByID(string ID)
+        {
+            if (this.SelectByID(ID))
+            {
+                this.biere.RemoveEtiquette();
+                base.DeleteRecordByID(ID);
+            }
+        }
+
         public List<BieresRecord> ToList()
         {
             List<object> list = this.RecordsList();

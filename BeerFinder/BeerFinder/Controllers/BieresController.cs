@@ -134,7 +134,9 @@ namespace BeerFinder.Controllers
             {
                 if (table.SelectByID(record.Id.ToString()))
                 {
+                    record.Etiquette = table.biere.Etiquette;
                     table.biere = record;
+                    table.biere.UploadEtiquette(Request);
                     table.Update();
                     return RedirectToAction("ListerBieres", "Bieres");
                 }

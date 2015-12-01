@@ -12,7 +12,10 @@
 
 <h2>EditerBieres</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("EditerBieres",
+                        "Bieres",
+                        FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -29,23 +32,6 @@
                 @Html.ValidationMessageFor(model => model.NomBiere)
             </div>
         </div>
-
-        <!--<div class="form-group">
-            @Html.LabelFor(model => model.IdType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdType)
-                @Html.ValidationMessageFor(model => model.IdType)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NomType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NomType)
-                @Html.ValidationMessageFor(model => model.NomType)
-            </div>
-        </div>
-        -->
 
         <div class="form-group" style="display:none">
             @Html.LabelFor(model => model.IdType, new { @class = "control-label col-md-2" })
@@ -82,8 +68,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Etiquette, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Etiquette)
-                @Html.ValidationMessageFor(model => model.Etiquette)
+                <img id="new_image" src="@Url.Content("~" + Model.GetEtiquetteURL())" class="poster" />
+                <input type="file" name="FU_Image" id="FU_Image" style="display:none;" onchange="PreLoadImage();" />
+                <br />
+                <input type="button" class="AvatarBrowseButton" id="uploadTrigger" onclick="document.getElementById('FU_Image').click();" value="Choisir le logo..." />
             </div>
         </div>
 
