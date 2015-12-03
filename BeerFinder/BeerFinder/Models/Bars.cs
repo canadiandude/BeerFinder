@@ -75,5 +75,6 @@ namespace BeerFinder.Models
                base.DeleteRecordByID(ID);
            }
        }
+        
     }
 }

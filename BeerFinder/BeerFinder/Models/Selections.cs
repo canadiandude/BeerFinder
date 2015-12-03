@@ -52,5 +52,9 @@ namespace BeerFinder.Models
             String SQL = "DELETE FROM Selections WHERE IdBar=" + IdBar + " AND IdBiere=" + IdBiere;
             NonQuerySQL(SQL);
         }
+        public void  DeleteSelection(String IdBiere)
+        {
+            
+        }
     }
 }

@@ -74,6 +74,8 @@ namespace BeerFinder.Controllers
         public ActionResult SupprimerTypes(String Id)
         {
             TypesTable table = new TypesTable(Session["Database"]);
+            BieresTable biere = new BieresTable(Session["Database"]);
+            biere.DeleteAllByType(Id);
             table.DeleteRecordByID(Id);
             return RedirectToAction("ListerTypes", "Bieres");
         }

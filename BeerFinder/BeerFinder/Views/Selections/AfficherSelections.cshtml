@@ -57,9 +57,10 @@ foreach (var item in Model) {
             @(((List<String>)Session["ListePrix"])[index++])
         </td>
         <td>
-            @Html.ActionLink("Éditer", "EditerSelections", new { id=item.IdSelections }) |
-            @Html.ActionLink("Retirer", "SupprimerSelections", new { id=item.IdSelections })
+            <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerSelections", "Selections", new { id = item.Id })'"></span> |
+            <span class="glyphicon glyphicon-trash" onclick="BBConfirm('Êtes-vous sûr de vouloir supprimer @item.NomBiere ?', '@Url.Action("SupprimerSelections", "Selections", new { id = item.Id })')"></span>
         </td>
+                 
     </tr>
 }
 }

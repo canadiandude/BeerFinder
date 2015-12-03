@@ -44,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.VolumeAlcool)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Etiquette)
+            <img id="new_image" class="img-rounded" src="@Url.Content("~" +item.GetEtiquetteURL())" class="img-rounded" style="max-width:60px; max-height:60px;" />  
         </td>
         <td>
             <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerBieres", "Bieres", new { id = item.Id })'"></span> |

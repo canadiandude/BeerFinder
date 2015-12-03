@@ -172,6 +172,18 @@ namespace BeerFinder.Models
             }
         }
 
+        public void  DeleteAllByType(String IdType)
+        {
+            SelectByFieldName("IdType",long.Parse(IdType));
+            SelectionTable selection = new SelectionTable(connexionString);
+            while (Next())
+            {
+                selection.DeleteAllRecordByFieldName("IdBiere", biere.Id);
+                DeleteRecordByID(biere.Id);
+            }
+                
+        }
+
         public List<BieresRecord> ToList()
         {
             List<object> list = this.RecordsList();
