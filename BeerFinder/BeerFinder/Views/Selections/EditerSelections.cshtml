@@ -1,0 +1,41 @@
+﻿@model BeerFinder.Models.SelectionsRecord
+
+@{
+    ViewBag.Title = "EditerSelection";
+}
+
+<h2>EditerSelection</h2>
+
+<h1>Changer le prix de la @(Model.ListeBieres[0].NomBiere) pour @(((BeerFinder.Models.BarsTable)Session["Bar"]).bar.NomBar)</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>SelectionsRecord</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.IdBar)
+        @Html.HiddenFor(model => model.IdBiere)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prix, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prix)
+                @Html.ValidationMessageFor(model => model.Prix)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

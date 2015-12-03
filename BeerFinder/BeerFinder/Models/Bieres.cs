@@ -28,6 +28,8 @@ namespace BeerFinder.Models
 
         public String Etiquette { get; set; }
 
+        public long IdSelections { get; set; }
+
         private ImageGUIDReference ImageReference;
 
         public List<TypesRecord> ListeTypes { get; set; }
@@ -127,9 +129,11 @@ namespace BeerFinder.Models
                             "Types.NomType, " +
                             "Bieres.Brasserie, " +
                             "Bieres.VolumeAlcool, " +
-                            "Bieres.Etiquette " +
+                            "Bieres.Etiquette, " +
+                            "Selections.Id AS IdSelections " +
                             "FROM Bieres " +
                             "INNER JOIN Types ON Bieres.IdType=Types.Id " +
+                            "INNER JOIN Selections ON Selections.IdBiere=Bieres.Id AND Selections.IdBar=" + BarId + " " +
                             "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar="+BarId+")";
 
             QuerySQL(sql);

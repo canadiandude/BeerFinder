@@ -7,7 +7,7 @@
 <h2>AfficherSelections</h2>
 
 <p>
-    @Html.ActionLink("Ajouter une bière à la sélection", "AjouterSelection")
+    @Html.ActionLink("Ajouter une bière à la sélection", "AjouterSelections")
 </p>
 
 <h1>Sélection du @(((BeerFinder.Models.BarsTable)Session["Bar"]).bar.NomBar)</h1>
@@ -57,9 +57,8 @@ foreach (var item in Model) {
             @(((List<String>)Session["ListePrix"])[index++])
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Éditer", "EditerSelections", new { id=item.IdSelections }) |
+            @Html.ActionLink("Retirer", "SupprimerSelections", new { id=item.IdSelections })
         </td>
     </tr>
 }

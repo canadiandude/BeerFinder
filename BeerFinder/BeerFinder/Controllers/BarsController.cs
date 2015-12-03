@@ -22,7 +22,7 @@ namespace BeerFinder.Controllers
             bars.SelectAll();
             return View(bars.ToList());
         }
-       
+
         [HttpGet]
         public ActionResult AjouterBars()
         {
@@ -33,7 +33,7 @@ namespace BeerFinder.Controllers
         {
             if (ModelState.IsValid)
             {
-                BarsTable table = new BarsTable(Session["Database"]);                
+                BarsTable table = new BarsTable(Session["Database"]);
                 table.bar = bar;
                 table.bar.UploadLogo(Request);
                 table.Insert();
@@ -42,38 +42,41 @@ namespace BeerFinder.Controllers
             return View(bar);
         }
 
-           [HttpGet]
-         public ActionResult SupprimerBar(String id)
+        [HttpGet]
+        public ActionResult SupprimerBar(String id)
         {
-            BarsTable table = new BarsTable(Session["Database"]);
-            table.DeleteRecordByID(id);
+            BarsTable barsTable = new BarsTable(Session["Database"]);
+            barsTable.DeleteRecordByID(id);
+
+            SelectionTable selectionTable = new SelectionTable(Session["Database"]);
+            selectionTable.DeleteAllRecordByFieldName("IdBar", id);
 
             return RedirectToAction("ListerBars", "Bars");
         }
-           [HttpGet]
+        [HttpGet]
         public ActionResult EditerBar(String id)
-           {
-               BarsTable table = new BarsTable(Session["Database"]);
-               if (table.SelectByID(id))
-                   return View(table.bar);
-               else
-                   return RedirectToAction("ListerBars", "Bars");
+        {
+            BarsTable table = new BarsTable(Session["Database"]);
+            if (table.SelectByID(id))
+                return View(table.bar);
+            else
+                return RedirectToAction("ListerBars", "Bars");
 
-           }
+        }
 
-           [HttpPost]
-           public ActionResult EditerBar(BarsRecord bar)
-           {
-               if (ModelState.IsValid)
-               {
-                   BarsTable table = new BarsTable(Session["Database"]);
-                   table.bar = bar;
-                   table.bar.UploadLogo(Request);
-                   table.Update();
-                   return RedirectToAction("ListerBars", "Bars");
-               }
+        [HttpPost]
+        public ActionResult EditerBar(BarsRecord bar)
+        {
+            if (ModelState.IsValid)
+            {
+                BarsTable table = new BarsTable(Session["Database"]);
+                table.bar = bar;
+                table.bar.UploadLogo(Request);
+                table.Update();
+                return RedirectToAction("ListerBars", "Bars");
+            }
 
-               return View(bar);
-           }
-	}
+            return View(bar);
+        }
+    }
 }

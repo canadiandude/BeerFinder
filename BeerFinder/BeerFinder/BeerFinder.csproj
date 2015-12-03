@@ -178,7 +178,8 @@
     <Content Include="Views\Bieres\AjouterBieres.cshtml" />
     <Content Include="Views\Bieres\EditerBieres.cshtml" />
     <Content Include="Views\Selections\AfficherSelections.cshtml" />
-    <Content Include="Views\Selections\AjouterSelection.cshtml" />
+    <Content Include="Views\Selections\AjouterSelections.cshtml" />
+    <Content Include="Views\Selections\EditerSelections.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

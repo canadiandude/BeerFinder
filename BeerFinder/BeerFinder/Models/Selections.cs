@@ -12,6 +12,7 @@ namespace BeerFinder.Models
         public long IdBar {get;set; }
         [Display(Name="Bière")]
         public long IdBiere { get; set; }
+        [Required]
         public decimal Prix { get; set; }
 
         public List<BieresRecord> ListeBieres;
@@ -44,6 +45,12 @@ namespace BeerFinder.Models
             }
 
             return list;
+        }
+
+        public void DeleteSelection(String IdBar, String IdBiere)
+        {
+            String SQL = "DELETE FROM Selections WHERE IdBar=" + IdBar + " AND IdBiere=" + IdBiere;
+            NonQuerySQL(SQL);
         }
     }
 }
