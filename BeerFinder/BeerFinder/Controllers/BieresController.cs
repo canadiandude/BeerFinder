@@ -118,6 +118,7 @@ namespace BeerFinder.Controllers
                 table.Insert();
                 return RedirectToAction("Index", "Bieres");
             }
+
             return View(biere);
         }
 
@@ -158,6 +159,7 @@ namespace BeerFinder.Controllers
             table.DeleteRecordByID(Id);
             return RedirectToAction("ListerBieres", "Bieres");
         }
+<<<<<<< HEAD
         [HttpGet]
         public ActionResult Trier(String sortBy)
         {
@@ -183,6 +185,14 @@ namespace BeerFinder.Controllers
                 }
             }
             return RedirectToAction("ListerBieres", "Bieres");
+=======
+
+        public ActionResult DetailsBiere(String Id)
+        {
+            BieresParBarTable table = new BieresParBarTable(Session["Database"]);
+            table.SelectBieres(Id);
+            return View(table.ToList());
+>>>>>>> origin/master
         }
     }
 }

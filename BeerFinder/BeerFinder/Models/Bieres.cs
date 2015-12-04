@@ -134,7 +134,11 @@ namespace BeerFinder.Models
                             "FROM Bieres " +
                             "INNER JOIN Types ON Bieres.IdType=Types.Id " +
                             "INNER JOIN Selections ON Selections.IdBiere=Bieres.Id AND Selections.IdBar=" + BarId + " " +
+<<<<<<< HEAD
                             "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar="+BarId+") ORDER BY " + orderBy;
+=======
+                            "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar=" + BarId + ")";
+>>>>>>> origin/master
 
             QuerySQL(sql);
         }
@@ -172,16 +176,16 @@ namespace BeerFinder.Models
             }
         }
 
-        public void  DeleteAllByType(String IdType)
+        public void DeleteAllByType(String IdType)
         {
-            SelectByFieldName("IdType",long.Parse(IdType));
+            SelectByFieldName("IdType", long.Parse(IdType));
             SelectionTable selection = new SelectionTable(connexionString);
             while (Next())
             {
                 selection.DeleteAllRecordByFieldName("IdBiere", biere.Id);
                 DeleteRecordByID(biere.Id);
             }
-                
+
         }
 
         public List<BieresRecord> ToList()
@@ -189,6 +193,43 @@ namespace BeerFinder.Models
             List<object> list = this.RecordsList();
             List<BieresRecord> bieres_list = new List<BieresRecord>();
             foreach (BieresRecord biere in list)
+            {
+                bieres_list.Add(biere);
+            }
+            return bieres_list;
+        }
+    }
+
+    public class BieresParBar
+    {
+        public String NomBiere { get; set; }
+        public String NomBar { get; set; }
+        public decimal Prix { get; set; }
+    }
+
+    public class BieresParBarTable : SqlExpressWrapper
+    {
+        public BieresParBar bieresParBar {get; set;}
+        public BieresParBarTable(object cs)
+            : base(cs)
+        {
+            bieresParBar = new BieresParBar();
+        }
+
+        public void SelectBieres(String IdBiere)
+        {
+            String SQL = "SELECT NomBiere, NomBar, Prix FROM Bieres " +
+                            "INNER JOIN Selections ON Selections.IdBiere=Bieres.Id " +
+                            "INNER JOIN Bars ON Selections.IdBar=Bars.Id " +
+                            "WHERE Selections.IdBiere=" + IdBiere;
+            QuerySQL(SQL);
+        }
+
+        public List<BieresParBar> ToList()
+        {
+            List<object> list = this.RecordsList();
+            List<BieresParBar> bieres_list = new List<BieresParBar>();
+            foreach (BieresParBar biere in list)
             {
                 bieres_list.Add(biere);
             }
