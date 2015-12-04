@@ -112,6 +112,7 @@ namespace BeerFinder.Controllers
                 table.Insert();
                 return RedirectToAction("Index", "Bieres");
             }
+
             return View(biere);
         }
 
@@ -151,6 +152,13 @@ namespace BeerFinder.Controllers
             BieresTable table = new BieresTable(Session["Database"]);
             table.DeleteRecordByID(Id);
             return RedirectToAction("ListerBieres", "Bieres");
+        }
+
+        public ActionResult DetailsBiere(String Id)
+        {
+            BieresParBarTable table = new BieresParBarTable(Session["Database"]);
+            table.SelectBieres(Id);
+            return View(table.ToList());
         }
     }
 }

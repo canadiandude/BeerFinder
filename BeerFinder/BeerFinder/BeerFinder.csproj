@@ -180,6 +180,7 @@
     <Content Include="Views\Selections\AfficherSelections.cshtml" />
     <Content Include="Views\Selections\AjouterSelections.cshtml" />
     <Content Include="Views\Selections\EditerSelections.cshtml" />
+    <Content Include="Views\Bieres\DetailsBiere.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
