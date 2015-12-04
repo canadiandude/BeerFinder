@@ -15,16 +15,36 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomBiere)
+            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.NomBiere"})' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Titre" />
+                @Html.DisplayNameFor(model => model.NomBiere)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomType)
+            <a href='@Url.Action("Trier", "Selections", new { sortBy = "Types.NomType" })' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Titre" />
+                @Html.DisplayNameFor(model => model.NomType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brasserie)
+            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.Brasserie"})' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Titre" />
+                @Html.DisplayNameFor(model => model.Brasserie)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VolumeAlcool)
+            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.VolumeAlcool"})' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Titre" />
+                @Html.DisplayNameFor(model => model.VolumeAlcool)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Etiquette)
@@ -35,34 +55,35 @@
         <th></th>
     </tr>
 
-@{int index = 0;
-foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomBiere)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brasserie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VolumeAlcool)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Etiquette)
-        </td>
-        <td>
-            @(((List<String>)Session["ListePrix"])[index++])
-        </td>
-        <td>
-            <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerSelections", "Selections", new { id = item.Id })'"></span> |
-            <span class="glyphicon glyphicon-trash" onclick="BBConfirm('Êtes-vous sûr de vouloir supprimer @item.NomBiere ?', '@Url.Action("SupprimerSelections", "Selections", new { id = item.Id })')"></span>
-        </td>
-                 
-    </tr>
-}
-}
+    @{int index = 0;
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomBiere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brasserie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolumeAlcool)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Etiquette)
+            </td>
+            <td>
+                @(((List<String>)Session["ListePrix"])[index++])
+            </td>
+            <td>
+                <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerSelections", "Selections", new { id = item.Id })'"></span> |
+                <span class="glyphicon glyphicon-trash" onclick="BBConfirm('Êtes-vous sûr de vouloir supprimer @item.NomBiere ?', '@Url.Action("SupprimerSelections", "Selections", new { id = item.Id })')"></span>
+            </td>
+
+        </tr>
+    }
+    }
 
 </table>

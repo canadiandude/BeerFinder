@@ -20,8 +20,13 @@ namespace BeerFinder.Controllers
         {
             if (!String.IsNullOrEmpty(Id))
             {
+                String orderBy = "";
+
+                if (Session["SortBy"] != null)
+                    orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+
                 BieresTable bieres = new BieresTable(Session["Database"]);
-                bieres.SelectFromSelection(Id);
+                bieres.SelectFromSelection(Id,orderBy);
 
                 BarsTable bars = new BarsTable(Session["Database"]);
                 bars.SelectByID(Id);
@@ -107,6 +112,32 @@ namespace BeerFinder.Controllers
                 selection.ListeBieres.Add(bieres.biere);
                 return View(selection);
             }
+        }
+        [HttpGet]
+        public ActionResult Trier(String sortBy)
+        {
+
+            if (Session["SortBy"] == null)
+            {
+                Session["SortBy"] = sortBy;
+                Session["SortOrder"] = "ASC";
+            }
+            else
+            {
+                if ((String)Session["SortBy"] == sortBy)
+                {
+                    if ((String)Session["sortOrder"] == "ASC")
+                        Session["SortOrder"] = "DESC";
+                    else
+                        Session["SortOrder"] = "ASC";
+                }
+                else
+                {
+                    Session["SortBy"] = sortBy;
+                    Session["SortOrder"] = "ASC";
+                }
+            }
+            return RedirectToAction("AfficherSelections", "Selections ");
         }
     }
 }

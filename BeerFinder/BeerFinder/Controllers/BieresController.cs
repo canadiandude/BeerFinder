@@ -86,7 +86,13 @@ namespace BeerFinder.Controllers
         public ActionResult ListerBieres()
         {
             BieresTable table = new BieresTable(Session["Database"]);
-            table.SelectAll();
+            String orderBy = "";
+
+            if (Session["SortBy"] != null)
+                orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+
+            table.SelectAll(orderBy);
+            Session["SortBy"] = null;
 
             return View(table.ToList());
         }
@@ -150,6 +156,32 @@ namespace BeerFinder.Controllers
         {
             BieresTable table = new BieresTable(Session["Database"]);
             table.DeleteRecordByID(Id);
+            return RedirectToAction("ListerBieres", "Bieres");
+        }
+        [HttpGet]
+        public ActionResult Trier(String sortBy)
+        {
+
+            if (Session["SortBy"] == null)
+            {
+                Session["SortBy"] = sortBy;
+                Session["SortOrder"] = "ASC";
+            }
+            else
+            {
+                if ((String)Session["SortBy"] == sortBy)
+                {
+                    if ((String)Session["sortOrder"] == "ASC")
+                        Session["SortOrder"] = "DESC";
+                    else
+                        Session["SortOrder"] = "ASC";
+                }
+                else
+                {
+                    Session["SortBy"] = sortBy;
+                    Session["SortOrder"] = "ASC";
+                }
+            }
             return RedirectToAction("ListerBieres", "Bieres");
         }
     }

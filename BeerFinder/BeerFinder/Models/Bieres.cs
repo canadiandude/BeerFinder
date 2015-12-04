@@ -120,7 +120,7 @@ namespace BeerFinder.Models
             return false;
         }
 
-        public void SelectFromSelection(String BarId)
+        public void SelectFromSelection(String BarId, String orderBy = "")
         {
             String sql = "SELECT " +
                             "Bieres.Id, " +
@@ -134,7 +134,7 @@ namespace BeerFinder.Models
                             "FROM Bieres " +
                             "INNER JOIN Types ON Bieres.IdType=Types.Id " +
                             "INNER JOIN Selections ON Selections.IdBiere=Bieres.Id AND Selections.IdBar=" + BarId + " " +
-                            "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar="+BarId+")";
+                            "WHERE Bieres.Id IN (SELECT IdBiere FROM Selections WHERE IdBar="+BarId+") ORDER BY " + orderBy;
 
             QuerySQL(sql);
         }
