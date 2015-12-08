@@ -4,13 +4,10 @@
     ViewBag.Title = "DetailsBiere";
 }
 
-<h2>DetailsBiere</h2>
 
 @if (((List<BeerFinder.Models.BieresParBar>)Model).Count >= 1)
 {
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <h1>Bars offrant la @(((List<BeerFinder.Models.BieresParBar>)Model)[0].NomBiere)</h1>
 <table class="table">
     <tr>
@@ -38,3 +35,4 @@
     <h1>Aucun bar n'offre cette bière</h1>
 }
 
+@Html.ActionLink("Retour à la liste", "ListerBieres")

@@ -32,10 +32,13 @@ namespace BeerFinder.Models
             SetTableName("Selections");
         }
 
-        public List<String> ListPrix(string IdBar)
+        public List<String> ListPrix(string IdBar,String orderby = "")
         {
             List<String> list = new List<String>();
             String SQL = "SELECT * FROM Selections WHERE IdBar=" + IdBar;
+            if (orderby != "" && orderby.IndexOf("Prix") != -1)
+                SQL += " ORDER BY " + orderby;
+
             QuerySQL(SQL);
 
             while (Next())

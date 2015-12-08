@@ -20,20 +20,20 @@ namespace BeerFinder.Controllers
         {
             if (!String.IsNullOrEmpty(Id))
             {
-                String orderBy = "";
+                String orderby = "";
 
-                if (Session["SortBy"] != null)
-                    orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+               if (Session["SortBy"] != null)
+                orderby = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
 
                 BieresTable bieres = new BieresTable(Session["Database"]);
-                bieres.SelectFromSelection(Id,orderBy);
+                bieres.SelectFromSelection(Id, orderby);
 
                 BarsTable bars = new BarsTable(Session["Database"]);
                 bars.SelectByID(Id);
                 Session["Bar"] = bars;
 
                 SelectionTable selection = new SelectionTable(Session["Database"]);
-                Session["ListePrix"] = selection.ListPrix(Id);
+                Session["ListePrix"] = selection.ListPrix(Id,orderby);
 
                 return View(bieres.ToList());
             }
@@ -102,7 +102,7 @@ namespace BeerFinder.Controllers
                 SelectionTable table = new SelectionTable(Session["Database"]);
                 table.Selection = selection;
                 table.Update();
-                return RedirectToAction("AfficherSelections", ((BarsTable)Session["Bar"]).bar.Id);
+                return RedirectToAction("AfficherSelections", "Selections", new { Id = ((BarsTable)Session["Bar"]).bar.Id });
             }
             else
             {
@@ -114,7 +114,7 @@ namespace BeerFinder.Controllers
             }
         }
         [HttpGet]
-        public ActionResult Trier(String sortBy)
+        public ActionResult Trier(String id, String sortBy)
         {
 
             if (Session["SortBy"] == null)
@@ -137,7 +137,7 @@ namespace BeerFinder.Controllers
                     Session["SortOrder"] = "ASC";
                 }
             }
-            return RedirectToAction("AfficherSelections", "Selections ");
+            return RedirectToAction("AfficherSelections", "Selections", new { Id = id });
         }
     }
 }

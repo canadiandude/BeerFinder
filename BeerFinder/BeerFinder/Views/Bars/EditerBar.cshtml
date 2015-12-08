@@ -1,10 +1,10 @@
 ﻿@model BeerFinder.Models.BarsRecord
 
 @{
-    ViewBag.Title = "EditerBar";
+    ViewBag.Title = "Editer un bar";
 }
 
-<h2>EditerBar</h2>
+<h2>Editer @Model.NomBar</h2>
 
 
 @using (Html.BeginForm("EditerBar",
@@ -55,7 +55,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "ListerBars")
 </div>
 
 @section Scripts {

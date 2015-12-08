@@ -1,10 +1,10 @@
 ﻿@model BeerFinder.Models.TypesRecord
 
 @{
-    ViewBag.Title = "EditerType";
+    ViewBag.Title = "Editer un Type";
 }
 
-<h2>EditerType</h2>
+<h2>Editer @Model.NomType</h2>
 
 @using (Html.BeginForm())
 {
@@ -41,5 +41,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "ListerTypes")
 </div>

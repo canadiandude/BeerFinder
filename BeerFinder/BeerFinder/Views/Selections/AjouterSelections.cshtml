@@ -10,7 +10,7 @@
     }
 </script>
 
-<h2>AjouterSelection</h2>
+<h2>Ajouter une biere a la Selection du bar @(((BeerFinder.Models.BarsTable)Session["Bar"]).bar.NomBar)</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -53,5 +53,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Retour à la liste", "AfficherSelections")  
 </div>

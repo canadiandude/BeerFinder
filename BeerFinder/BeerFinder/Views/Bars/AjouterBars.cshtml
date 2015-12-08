@@ -1,10 +1,10 @@
 ﻿@model BeerFinder.Models.BarsRecord
 
 @{
-    ViewBag.Title = "AjouterBars";
+    ViewBag.Title = "Ajouter un bar";
 }
 
-<h2>AjouterBars</h2>
+<h2>Ajouter un bar</h2>
 
 
 
@@ -31,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Logo, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img id="new_image" src="@Url.Content("~" + Model.GetLogoURL())" class="poster" />
+                <img id="new_image" src="@Url.Content("~" + Model.GetLogoURL())" class="poster" style="max-width:160px; max-height:140px;" />
                 <input type="file" name="FU_Image" id="FU_Image" style="display:none;" onchange="PreLoadImage();" />
                 <br />
                 <input type="button" class="AvatarBrowseButton" id="uploadTrigger" onclick="document.getElementById('FU_Image').click();" value="Choisir le logo..." />
@@ -56,7 +56,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+  @Html.ActionLink("Retour à la liste", "ListerBars")
 </div>
 
 @section Scripts {

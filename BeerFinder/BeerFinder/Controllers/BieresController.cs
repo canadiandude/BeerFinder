@@ -184,6 +184,7 @@ namespace BeerFinder.Controllers
                 }
             }
             return RedirectToAction("ListerBieres", "Bieres");
+        }
 
 
         public ActionResult DetailsBiere(String Id)

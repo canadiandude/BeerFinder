@@ -4,7 +4,6 @@
     ViewBag.Title = "EditerSelection";
 }
 
-<h2>EditerSelection</h2>
 
 <h1>Changer le prix de la @(Model.ListeBieres[0].NomBiere) pour @(((BeerFinder.Models.BarsTable)Session["Bar"]).bar.NomBar)</h1>
 
@@ -37,5 +36,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à la liste", "AfficherSelections")
 </div>

@@ -1,10 +1,8 @@
 ﻿@model IEnumerable<BeerFinder.Models.BieresRecord>
 
 @{
-    ViewBag.Title = "AfficherSelections";
+    ViewBag.Title = "Afficher les Selections";
 }
-
-<h2>AfficherSelections</h2>
 
 <p>
     @Html.ActionLink("Ajouter une bière à la sélection", "AjouterSelections")
@@ -15,41 +13,51 @@
 <table class="table">
     <tr>
         <th>
-            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.NomBiere"})' style="text-decoration:none">
+            <a href='@Url.Action("Trier", "Selections",new {Id = (((BeerFinder.Models.BarsTable)Session["Bar"]).bar.Id), sortBy = "Bieres.NomBiere"})' style="text-decoration:none">
                 <img src='@Url.Content("~/Images/Sort.png")'
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
-                     title="Trier par Titre" />
+                     title="Trier par Bar" />
+            </a>
                 @Html.DisplayNameFor(model => model.NomBiere)
         </th>
         <th>
-            <a href='@Url.Action("Trier", "Selections", new { sortBy = "Types.NomType" })' style="text-decoration:none">
+            <a href='@Url.Action("Trier", "Selections", new { Id = (((BeerFinder.Models.BarsTable)Session["Bar"]).bar.Id), sortBy = "Types.NomType" })' style="text-decoration:none">
                 <img src='@Url.Content("~/Images/Sort.png")'
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
-                     title="Trier par Titre" />
+                     title="Trier par Bar" />
+            </a>
                 @Html.DisplayNameFor(model => model.NomType)
         </th>
         <th>
-            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.Brasserie"})' style="text-decoration:none">
+            <a href='@Url.Action("Trier", "Selections", new { Id = (((BeerFinder.Models.BarsTable)Session["Bar"]).bar.Id), sortBy = "Bieres.Brasserie" })' style="text-decoration:none">
                 <img src='@Url.Content("~/Images/Sort.png")'
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
-                     title="Trier par Titre" />
+                     title="Trier par Bar" />
+            </a>
                 @Html.DisplayNameFor(model => model.Brasserie)
-        </th>
+</th>
         <th>
-            <a href='@Url.Action("Trier", "Selections",new {sortBy = "Bieres.VolumeAlcool"})' style="text-decoration:none">
+            <a href='@Url.Action("Trier", "Selections", new { Id = (((BeerFinder.Models.BarsTable)Session["Bar"]).bar.Id), sortBy = "Bieres.VolumeAlcool" })' style="text-decoration:none">
                 <img src='@Url.Content("~/Images/Sort.png")'
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
-                     title="Trier par Titre" />
+                     title="Trier par Bar" />
+            </a>
                 @Html.DisplayNameFor(model => model.VolumeAlcool)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Etiquette)
         </th>
         <th>
+            <a href='@Url.Action("Trier", "Selections", new { Id = (((BeerFinder.Models.BarsTable)Session["Bar"]).bar.Id), sortBy = "Prix" })' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Bar" />
+            </a>
             Prix
         </th>
         <th></th>
@@ -78,7 +86,7 @@
                 @(((List<String>)Session["ListePrix"])[index++])
             </td>
             <td>
-                <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerSelections", "Selections", new { id = item.Id })'"></span> |
+                <span class="glyphicon glyphicon-pencil" onclick="location.href='@Url.Action("EditerSelections", "Selections", new { id = item.IdSelections })'"></span> |
                 <span class="glyphicon glyphicon-trash" onclick="BBConfirm('Êtes-vous sûr de vouloir supprimer @item.NomBiere ?', '@Url.Action("SupprimerSelections", "Selections", new { id = item.Id })')"></span>
             </td>
 
