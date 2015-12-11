@@ -12,6 +12,12 @@
 <table class="table">
     <tr>
         <th>
+            <a href='@Url.Action("Trier", "Bieres", new { sortBy = "NomType" })' style="text-decoration:none">
+                <img src='@Url.Content("~/Images/Sort.png")'
+                     alt="Ajouter" class="CMD_Icon_4"
+                     data-toggle="tooltip"
+                     title="Trier par Titre" />
+            </a>
             @Html.DisplayNameFor(model => model.NomType)
         </th>
         <th>

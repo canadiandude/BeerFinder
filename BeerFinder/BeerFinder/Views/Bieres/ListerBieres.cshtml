@@ -4,7 +4,7 @@
     ViewBag.Title = "Lister les bières";
 }
 
-<h2>ListerB les bières</h2>
+<h2>Lister les bières</h2>
 
 <p>
     @Html.ActionLink("Ajouter une bière", "AjouterBieres")
@@ -17,6 +17,7 @@
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
                      title="Trier par Titre" />
+            </a>
                 @Html.DisplayNameFor(model => model.NomBiere)
         </th>
         <th>
@@ -25,6 +26,7 @@
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
                      title="Trier par Titre" />
+            </a>
                 @Html.DisplayNameFor(model => model.NomType)
         </th>
         <th>
@@ -33,6 +35,7 @@
                      alt="Ajouter" class="CMD_Icon_4"
                      data-toggle="tooltip"
                      title="Trier par Titre" />
+            </a>
                 @Html.DisplayNameFor(model => model.Brasserie)
         </th>
         <th>

@@ -22,7 +22,14 @@ namespace BeerFinder.Controllers
         public ActionResult ListerTypes()
         {
             TypesTable table = new TypesTable(Session["Database"]);
-            table.SelectAll();
+
+            String orderBy = "";
+
+            if (Session["SortBy"] != null)
+                orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+
+            table.SelectAll(orderBy);
+            Session["SortBy"] = null;
 
             return View(table.ToList());
         }
@@ -183,7 +190,11 @@ namespace BeerFinder.Controllers
                     Session["SortOrder"] = "ASC";
                 }
             }
-            return RedirectToAction("ListerBieres", "Bieres");
+
+            if (sortBy != "NomType")
+                return RedirectToAction("ListerBieres", "Bieres");
+            else
+                return RedirectToAction("ListerTypes", "Bieres");
         }
 
 
