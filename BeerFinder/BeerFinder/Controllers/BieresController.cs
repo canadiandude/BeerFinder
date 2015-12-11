@@ -25,11 +25,11 @@ namespace BeerFinder.Controllers
 
             String orderBy = "";
 
-            if (Session["SortBy"] != null)
-                orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+            if (Session["SortBy_Type"] != null)
+                orderBy = (String)Session["SortBy_Type"] + " " + (String)Session["SortOrder"];
 
             table.SelectAll(orderBy);
-            Session["SortBy"] = null;
+
 
             return View(table.ToList());
         }
@@ -95,11 +95,10 @@ namespace BeerFinder.Controllers
             BieresTable table = new BieresTable(Session["Database"]);
             String orderBy = "";
 
-            if (Session["SortBy"] != null)
-                orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+            if (Session["SortBy_Bieres"] != null)
+                orderBy = (String)Session["SortBy_Bieres"] + " " + (String)Session["SortOrder"];
 
             table.SelectAll(orderBy);
-            Session["SortBy"] = null;
 
             return View(table.ToList());
         }
@@ -170,14 +169,14 @@ namespace BeerFinder.Controllers
         public ActionResult Trier(String sortBy)
         {
 
-            if (Session["SortBy"] == null)
+            if (Session["SortBy_Bieres"] == null)
             {
-                Session["SortBy"] = sortBy;
+                Session["SortBy_Bieres"] = sortBy;
                 Session["SortOrder"] = "ASC";
             }
             else
             {
-                if ((String)Session["SortBy"] == sortBy)
+                if ((String)Session["SortBy_Bieres"] == sortBy)
                 {
                     if ((String)Session["sortOrder"] == "ASC")
                         Session["SortOrder"] = "DESC";
@@ -186,24 +185,50 @@ namespace BeerFinder.Controllers
                 }
                 else
                 {
-                    Session["SortBy"] = sortBy;
+                    Session["SortBy_Bieres"] = sortBy;
                     Session["SortOrder"] = "ASC";
                 }
             }
 
-            if (sortBy != "NomType")
-                return RedirectToAction("ListerBieres", "Bieres");
-            else
-                return RedirectToAction("ListerTypes", "Bieres");
+
+            return RedirectToAction("ListerBieres", "Bieres");
+
         }
 
+        public ActionResult TrierType(String sortBy)
+        {
+
+            if (Session["SortBy_Type"] == null)
+            {
+                Session["SortBy_Type"] = sortBy;
+                Session["SortOrder"] = "ASC";
+            }
+            else
+            {
+                if ((String)Session["SortBy_Type"] == sortBy)
+                {
+                    if ((String)Session["sortOrder"] == "ASC")
+                        Session["SortOrder"] = "DESC";
+                    else
+                        Session["SortOrder"] = "ASC";
+                }
+                else
+                {
+                    Session["SortBy_Type"] = sortBy;
+                    Session["SortOrder"] = "ASC";
+                }
+            }
+
+
+
+            return RedirectToAction("ListerTypes", "Bieres");
+        }
 
         public ActionResult DetailsBiere(String Id)
         {
             BieresParBarTable table = new BieresParBarTable(Session["Database"]);
             table.SelectBieres(Id);
             return View(table.ToList());
-
         }
     }
 }

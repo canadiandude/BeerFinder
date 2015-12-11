@@ -18,16 +18,14 @@ namespace BeerFinder.Controllers
 
         public ActionResult ListerBars()
         {
-
-
             BarsTable bars = new BarsTable(Session["Database"]);
             String orderBy = "";
 
-            if (Session["SortBy"] != null)
-                orderBy = (String)Session["SortBy"] + " " + (String)Session["SortOrder"];
+            if (Session["SortBy_Bar"] != null)
+                orderBy = (String)Session["SortBy_Bar"] + " " + (String)Session["SortOrder"];
 
             bars.SelectAll(orderBy);
-            Session["SortBy"] = null;
+       
             return View(bars.ToList());
         }
 
@@ -90,14 +88,14 @@ namespace BeerFinder.Controllers
         public ActionResult Trier(String sortBy)
         {
 
-            if (Session["SortBy"] == null)
+            if (Session["SortBy_Bar"] == null)
             {
-                Session["SortBy"] = sortBy;
+                Session["SortBy_Bar"] = sortBy;
                 Session["SortOrder"] = "ASC";
             }
             else
             {
-                if ((String)Session["SortBy"] == sortBy)
+                if ((String)Session["SortBy_Bar"] == sortBy)
                 {
                     if ((String)Session["sortOrder"] == "ASC")
                         Session["SortOrder"] = "DESC";
@@ -106,7 +104,7 @@ namespace BeerFinder.Controllers
                 }
                 else
                 {
-                    Session["SortBy"] = sortBy;
+                    Session["SortBy_Bar"] = sortBy;
                     Session["SortOrder"] = "ASC";
                 }
             }
